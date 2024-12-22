@@ -5,9 +5,15 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon,FaSun } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import {useTheme} from 'next-themes';
+import { SignedIn,SignedOut,SignInButton,UserButton } from '@clerk/nextjs';
+import {dark,light} from '@clerk/nextjs';
+
+
 export default function Header() {
   const path = usePathname();
   const {theme, setTheme} = useTheme();
+
+
   return (
     <Navbar className='border-b-2'>
       <Link
@@ -35,11 +41,16 @@ export default function Header() {
         >
           {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
-        <Link href='/sign-in'>
-          <Button gradientDuoTone='pinkToOrange' outline>
-            Sign In
-          </Button>
-        </Link>
+        <SignedIn>
+          <UserButton appearance={{
+            baseTheme: theme === 'light' ? light : dark,
+          }} />
+        </SignedIn>
+        <SignedOut>
+          <Link href='/sign-in'>
+          <Button gradientDuoTone='pinkToOrange' outline>Sign In</Button>
+           </Link>
+        </SignedOut>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
