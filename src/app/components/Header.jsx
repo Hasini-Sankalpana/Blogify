@@ -43,7 +43,7 @@ export default function Header() {
         </Button>
         <SignedIn>
           <UserButton appearance={{
-            baseTheme: theme === 'light' ? light : dark,
+            baseTheme: theme === 'light' ? 'light' : 'dark',
           }} />
         </SignedIn>
         <SignedOut>
