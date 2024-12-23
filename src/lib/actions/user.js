@@ -19,17 +19,21 @@ export const createOrUpdateUser = async (
           firstName: first_name,
           lastName: last_name,
           profilePicture: image_url,
-          email: email_addresses[0].email_address,
+          email,
           username,
         },
       },
       { new: true, upsert: true }
     );
+
+    console.log('User successfully created or updated:', user);
     return user;
   } catch (error) {
-    console.log('Error creating or updating user:', error);
+    console.error('Error creating or updating user:', error);
+    return { error: 'An error occurred during the operation.' };
   }
 };
+
 
 export const deleteUser = async (id) => {
   try {
