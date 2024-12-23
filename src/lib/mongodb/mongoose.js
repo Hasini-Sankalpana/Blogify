@@ -11,7 +11,7 @@ export const connect = async () => {
 
     try {
         await mongoose.connect(process.env.MONGODB_URI, {
-            dbName:'Blogify',
+            dbName:'Blogify App',
             useUNewUrlParser: true,
             useUnifiedTopology: true,
         });
