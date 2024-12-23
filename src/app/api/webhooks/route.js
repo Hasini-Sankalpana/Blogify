@@ -21,7 +21,6 @@ export async function POST(req) {
   const svix_timestamp = headerPayload.get('svix-timestamp');
   const svix_signature = headerPayload.get('svix-signature');
 
-  // If there are no headers, return an error
   if (!svix_id || !svix_timestamp || !svix_signature) {
     return new Response('Error: Missing Svix headers', {
       status: 400,
@@ -34,7 +33,6 @@ export async function POST(req) {
 
   let evt;
 
-  // Verify payload with headers
   try {
     evt = wh.verify(body, {
       'svix-id': svix_id,
@@ -48,13 +46,9 @@ export async function POST(req) {
     });
   }
 
-  // Extract event data and type
   const { id } = evt?.data;
   const eventType = evt?.type;
-  console.log(`Webhook with an ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
 
-  // Handle user created or updated events
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { first_name, last_name, image_url, email_addresses, username } =
       evt?.data;
@@ -69,15 +63,15 @@ export async function POST(req) {
         username
       );
 
-      // Update Clerk user metadata if the user was created
       if (user && eventType === 'user.created') {
         try {
-          await clerkClient.users.updateUserMetadata(id, {
+          const metadataUpdate = await clerkClient.users.updateUserMetadata(id, {
             publicMetadata: {
-              userMongoId: user._id,
-              isAdmin: user.isAdmin,
+              userMongoId: user._id.toString(),
+              isAdmin: user.isAdmin || false,
             },
           });
+          console.log('User metadata updated successfully:', metadataUpdate);
         } catch (error) {
           console.error('Error updating user metadata:', error);
         }
@@ -90,9 +84,7 @@ export async function POST(req) {
     }
   }
 
-  // Handle user deleted event
   if (eventType === 'user.deleted') {
-    const { id } = evt?.data;
     try {
       await deleteUser(id);
     } catch (error) {
