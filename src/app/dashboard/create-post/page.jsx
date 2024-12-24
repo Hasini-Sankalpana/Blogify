@@ -4,7 +4,8 @@ import { Button, FileInput, Select, TextInput } from 'flowbite-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { uploadImageToCloudinary } from '@/cloudinary'; // Import helper function
-import ProgressBar from "@ramonak/react-progress-bar"; // Import progress bar
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';// Import progress bar
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 import 'react-quill-new/dist/quill.snow.css';
@@ -113,23 +114,36 @@ export default function CreatePostPage() {
           <div className='flex flex-row gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
             <FileInput type='file' accept='image/*' onChange={handleFileChange} />
             <Button
-              type='button'
-              gradientDuoTone='pinkToOrange'
-              size='sm'
-              outline
-              onClick={handleImageUpload}
-            >
-              Upload Image
-            </Button>
-          </div>
-          {/* Progress Bar */}
-          {uploadProgress > 0 && (
-            <ProgressBar
-              completed={uploadProgress}
-              bgColor="blue"
-              height="10px"
-            />
-          )}
+  type="button"
+  gradientDuoTone="pinkToOrange"
+  size="sm"
+  outline
+  onClick={handleImageUpload}
+  disabled={uploadProgress > 0 && uploadProgress < 100} // Disable when uploading
+>
+  {uploadProgress > 0 && uploadProgress < 100 ? (
+    <div style={{ width: '30px', height: '30px' }}>
+      <CircularProgressbar
+        value={uploadProgress}
+        text={`${uploadProgress}%`}
+        styles={{
+          path: {
+            stroke: 'orange', // Path color
+            strokeLinecap: 'round',
+            transition: 'stroke-dashoffset 0.5s ease 0s',
+          },
+          text: {
+            fill: '#ffffff', // Text color
+            fontSize: '35px',
+          },
+        }}
+      />
+    </div>
+  ) : (
+    'Upload Image' // Default text when no progress is being made
+  )}
+</Button>
+</div>
           {/* Show uploaded image preview */}
           {imageURL && (
             <img src={imageURL} alt="Uploaded" className="mt-4 rounded-md" />

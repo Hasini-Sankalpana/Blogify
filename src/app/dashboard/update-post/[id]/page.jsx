@@ -7,7 +7,8 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 import 'react-quill-new/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
-import ProgressBar from "@ramonak/react-progress-bar";
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function UpdatePost() {
@@ -136,27 +137,36 @@ export default function UpdatePost() {
               accept="image/*"
               onChange={(e) => setImageFile(e.target.files[0])}
             />
-            <Button
-              type="button"
-              gradientDuoTone="pinkToOrange"
-              size="sm"
-              outline
-              onClick={handleImageUpload}
-              disabled={uploadProgress > 0 && uploadProgress < 100}
-            >
-              {uploadProgress > 0 && uploadProgress < 100 ? (
-                <ProgressBar
-                  completed={uploadProgress}
-                  bgColor="#6a1b9a"
-                  baseBgColor="#d1c4e9"
-                  height="20px"
-                  labelColor="#ffffff"
-                  labelAlignment="outside"
-                />
-              ) : (
-                'Upload Image'
-              )}
-            </Button>
+           <Button
+  type="button"
+  gradientDuoTone="pinkToOrange"
+  size="sm"
+  outline
+  onClick={handleImageUpload}
+  disabled={uploadProgress > 0 && uploadProgress < 100}
+>
+  {uploadProgress > 0 && uploadProgress < 100 ? (
+    <div style={{ width: '50px', height: '50px' }}>
+      <CircularProgressbar
+        value={uploadProgress}
+        text={`${uploadProgress}%`}
+        styles={{
+          path: {
+            stroke: 'orange', // Path color
+            strokeLinecap: 'round',
+            transition: 'stroke-dashoffset 0.5s ease 0s',
+          },
+          text: {
+            fill: '#ffffff', // Text color
+            fontSize: '35px',
+          },
+        }}
+      />
+    </div>
+  ) : (
+    'Upload Image'
+  )}
+</Button>
           </div>
           {formData.image && (
             <img
