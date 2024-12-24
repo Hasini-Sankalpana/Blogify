@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import ThemeComp from "./components/ThemeComp";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeModeScript } from "flowbite-react";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
           <ThemeComp>
        <Header />
         {children}
+        <Footer/>
         </ThemeComp>
         </ThemeProvider>
       </body>

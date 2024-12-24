@@ -20,17 +20,11 @@ export default async function Home() {
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to Blogify</h1>
         <p className='text-gray-500 text-sm sm:text-base'>
-          Discover a variety of articles and tutorials on topics such as web
-          development, software engineering, and programming languages, all
-          brought to you through a blog built with Next.js and{' '}
-          <a
-            href='https://go.clerk.com/fgJHKlt'
-            className='text-teal-500 hover:underline'
-            target='_blank'
-          >
-            Clerk
-          </a>
-          .
+        Explore a diverse range of articles and tutorials covering various categories such
+         as Technology, Lifestyle, Travel, Sports, Science, and Astronomy. Whether you're 
+         passionate about the latest tech innovations, planning your next adventure, staying
+        updated on the latest sports events, diving into scientific discoveries, or exploring 
+        the mysteries of the cosmos, you'll find valuable content to engage with and broaden your horizons.
         </p>
         <Link
           href='/search'
