@@ -114,7 +114,7 @@ export default function CreatePostPage() {
             <FileInput type='file' accept='image/*' onChange={handleFileChange} />
             <Button
               type='button'
-              gradientDuoTone='purpleToBlue'
+              gradientDuoTone='pinkToOrange'
               size='sm'
               outline
               onClick={handleImageUpload}
@@ -143,7 +143,7 @@ export default function CreatePostPage() {
               setFormData({ ...formData, content: value });
             }}
           />
-          <Button type='submit' gradientDuoTone='purpleToPink'>
+          <Button type='submit' gradientDuoTone='pinkToOrange'>
             Publish
           </Button>
         </form>
