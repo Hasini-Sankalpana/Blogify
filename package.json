@@ -21,9 +21,8 @@
     "next": "15.1.2",
     "next-themes": "^0.4.4",
     "nprogress": "^0.2.0",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "react-progress-bar": "^0.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-quill-new": "^3.3.3",
     "svix": "^1.44.0"
   },

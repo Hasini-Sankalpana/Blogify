@@ -1,6 +1,6 @@
 'use client';
 
-import { Sidebar } from 'flowbite-react';
+import { Button, Sidebar } from 'flowbite-react';
 import {
   HiUser,
   HiArrowSmRight,
@@ -32,6 +32,8 @@ export default function DashSidebar() {
   if (!isSignedIn) {
     return null;
   }
+
+  const isAdmin = user?.publicMetadata?.isAdmin;
 
   return (
     <Sidebar className='w-full md:w-56'>
@@ -80,6 +82,12 @@ export default function DashSidebar() {
                 Users
               </Sidebar.Item>
             </Link>
+          )}
+
+{isAdmin && (
+            <Button outline gradientDuoTone="pinkToOrange">
+              <Link href="/dashboard/create-post">Create a Post</Link>
+            </Button>
           )}
           <Sidebar.Item icon={HiArrowSmRight} className='cursor-pointer'>
             <SignOutButton />
