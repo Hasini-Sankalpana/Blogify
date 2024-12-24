@@ -1,4 +1,5 @@
 import CallToAction from '@/app/components/CallToAction';
+import RecentPosts from '@/app/components/RecentPosts';
 import { Button } from 'flowbite-react';
 import Link from 'next/link';
 export default async function PostPage({ params }) {
@@ -54,6 +55,7 @@ export default async function PostPage({ params }) {
       <div className='max-w-4xl mx-auto w-full'>
         <CallToAction />
       </div>
+      <RecentPosts limit={3} />
     </main>
   );
 }
