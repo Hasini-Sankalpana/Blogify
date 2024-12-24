@@ -66,7 +66,9 @@ export default function Header() {
         <SignedIn>
           <UserButton appearance={{
             baseTheme: theme === 'light' ? 'light' : 'dark',
-          }} />
+          }}
+           userProfileUrl='/dashboard?tab=profile'
+          />
         </SignedIn>
         <SignedOut>
           <Link href='/sign-in'>
