@@ -53,7 +53,6 @@ export default async function PostPage({ params }) {
         dangerouslySetInnerHTML={{ __html: post?.content }}
       ></div>
       <div className='max-w-4xl mx-auto w-full'>
-        <CallToAction />
       </div>
       <RecentPosts limit={3} />
     </main>
